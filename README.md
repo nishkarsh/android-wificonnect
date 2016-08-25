@@ -1,4 +1,4 @@
-# android-wificonnect
+# android-wificonnect [ ![Download](https://api.bintray.com/packages/nishkarsh/maven/com.intentfilter%3Aandroid-wificonnect/images/download.svg) ](https://bintray.com/nishkarsh/maven/com.intentfilter%3Aandroid-wificonnect/_latestVersion)
 An android library to effortlessly connect to available WiFi networks
 
 ## Supported Features
@@ -16,6 +16,32 @@ An android library to effortlessly connect to available WiFi networks
 
 ### Limitations as of Now
 - As of now user can only connect to an Open Network (that doesn't need any authentication) using `connectToAvailableSSID()`
+
+### Including into project
+
+Make your project-level build.gradle has jcenter() under repositories block. Your build.gradle should look like:
+
+```
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.1.3'
+    }
+}
+```
+
+Gradle: `compile 'com.intentfilter:android-wificonnect:0.1.0'`
+
+Add as android-wificonnect as dependency inside app module level build.gradle under dependencies block. Your app level build.gradle should look like:
+
+```
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.intentfilter:android-wificonnect:0.1.0'
+}
+```
 
 **Note:**
  1. Marshmallow dynamic permissions must be handled for the library to work as WiFi scanning starting from Android M needs ACCESS_COARSE_LOCATION permission.
