@@ -97,6 +97,8 @@ public class WifiConnectionManager
         onConnectionStateChanged(AdvancedConnectionState.WIFI_DISABLED);
         if (initialStickyBroadcast) {
             wifiHelper.enableWifi();
+        } else {
+            abort();
         }
     }
 
