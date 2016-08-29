@@ -66,7 +66,7 @@ class WifiUtil {
             @Override
             public void onReceive(Context context, Intent intent) {
                 int wifiState = intent.getExtras().getInt(WifiManager.EXTRA_WIFI_STATE);
-                informWifiStateChanged(wifiState);
+                informWifiStateChanged(wifiState, isInitialStickyBroadcast());
             }
         };
         context.registerReceiver(wifiStateReceiver, new IntentFilter(WIFI_STATE_CHANGED_ACTION));
@@ -208,16 +208,16 @@ class WifiUtil {
         }
     }
 
-    private void informWifiStateChanged(int wifiState) {
+    private void informWifiStateChanged(int wifiState, boolean initialStickyBroadcast) {
         if (wifiStateListener == null) {
             logger.e("Listener for WifiStateChange is null, did you forget calling removeWifiStateChangeListener()?");
             return;
         }
 
         if (wifiState == WIFI_STATE_ENABLED) {
-            wifiStateListener.onWifiEnabled();
+            wifiStateListener.onWifiEnabled(initialStickyBroadcast);
         } else if (wifiState == WIFI_STATE_DISABLED) {
-            wifiStateListener.onWifiDisabled();
+            wifiStateListener.onWifiDisabled(initialStickyBroadcast);
         }
     }
 
@@ -228,9 +228,9 @@ class WifiUtil {
     }
 
     interface WifiStateChangeListener {
-        void onWifiEnabled();
+        void onWifiEnabled(boolean initialStickyBroadcast);
 
-        void onWifiDisabled();
+        void onWifiDisabled(boolean initialStickyBroadcast);
     }
 
     interface NetworkStateChangeListener {

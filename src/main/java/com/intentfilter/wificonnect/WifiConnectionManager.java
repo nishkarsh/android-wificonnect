@@ -75,8 +75,15 @@ public class WifiConnectionManager
         }
     }
 
+    public void abort() {
+        wifiUtil.removeNetworkStateChangeListener(this);
+        wifiUtil.removeWifiScanResultsListener(this);
+        wifiUtil.removeWifiStateChangeListener(this);
+        wifiUtil.clearNetworkBinding();
+    }
+
     @Override
-    public void onWifiEnabled() {
+    public void onWifiEnabled(boolean initialStickyBroadcast) {
         wifiUtil.removeWifiStateChangeListener(this);
         onConnectionStateChanged(AdvancedConnectionState.WIFI_ENABLED);
 
@@ -86,9 +93,11 @@ public class WifiConnectionManager
     }
 
     @Override
-    public void onWifiDisabled() {
+    public void onWifiDisabled(boolean initialStickyBroadcast) {
         onConnectionStateChanged(AdvancedConnectionState.WIFI_DISABLED);
-        wifiHelper.enableWifi();
+        if (initialStickyBroadcast) {
+            wifiHelper.enableWifi();
+        }
     }
 
     @Override
