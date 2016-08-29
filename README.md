@@ -36,14 +36,14 @@ buildscript {
 }
 ```
 
-Gradle: `compile 'com.intentfilter:android-wificonnect:0.1.1'`
+Gradle: `compile 'com.intentfilter:android-wificonnect:0.1.2'`
 
 Add as android-wificonnect as dependency inside app module level build.gradle under dependencies block. Your app level build.gradle should look like:
 
 ```
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.intentfilter:android-wificonnect:0.1.1'
+    compile 'com.intentfilter:android-wificonnect:0.1.2'
 }
 ```
 
