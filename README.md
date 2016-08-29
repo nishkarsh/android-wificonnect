@@ -6,6 +6,10 @@ An android library to effortlessly connect to available WiFi networks
 ### Upcoming
 - APIs that enables connection to any network (Open/WEP/WPA etc). There should be APIs that accept password in case network needs authentication.
 
+### Version 0.1.2
+- Added `WifiConnectionManager.abort()` method. This should be called when your app wants to stop scanning or connecting to WiFi.
+- The WiFi is enabled if it was disabled already. This happens if the broadcast that is received is `initialStickyBroadcast`, so if Wifi is disabled again by the user explicitly, `abort()` is called. This will remove all the listeners and the callbacks would no longer be received.
+
 ### Version 0.1.0
 - Initiate a scan for networks explicitly. If WiFi is turned off, it's turned on automatically and an attempt is made to connect to network.
 - Scenarios specific to Android L (API Level 21-22) and Android Marshmallow (API Level 23) are handled. In case a user wants to connect to a network that doesn't provide internet connectivity (Captive Portal), `WifiConnectionManager.setBindingEnabled(true)` can be called that would ensure that the app uses the network (to which the device would connect to when `WifiConnectionManager.connectToAvailableSSID(String SSID, ConnectionStateListener listener)` is called) to route traffic irrespective of whether it provides internet connectivity.
@@ -32,14 +36,14 @@ buildscript {
 }
 ```
 
-Gradle: `compile 'com.intentfilter:android-wificonnect:0.1.0'`
+Gradle: `compile 'com.intentfilter:android-wificonnect:0.1.1'`
 
 Add as android-wificonnect as dependency inside app module level build.gradle under dependencies block. Your app level build.gradle should look like:
 
 ```
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.intentfilter:android-wificonnect:0.1.0'
+    compile 'com.intentfilter:android-wificonnect:0.1.1'
 }
 ```
 
